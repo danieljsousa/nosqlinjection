@@ -4,10 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-//import insted.ValidaLogin;
-
-
-
 public class ValidaLoginTest{
 
 
