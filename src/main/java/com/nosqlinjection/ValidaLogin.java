@@ -6,8 +6,8 @@ public class ValidaLogin {
 
 	private String pathBDSQLite;
 	
-	public ValidaLogin(String thepathSQLite){
-		pathBDSQLite = thepathSQLite;
+	public ValidaLogin(){
+		
 	}
 
 	public boolean processaLogin(String user, String password){
@@ -19,12 +19,27 @@ public class ValidaLogin {
       
 	        try {
         	 	Class.forName("org.sqlite.JDBC");
-         		c = DriverManager.getConnection("jdbc:sqlite:./MyDB.db");
+         		//c = DriverManager.getConnection("jdbc:sqlite:./MyDB.db");
+				c = DriverManager.getConnection("jdbc:sqlite:MyDB.db");
+				
+				//Criar esquema e dados de teste!
+				stmt = c.createStatement();
+				ResultSet rs = stmt.executeQuery( "select exists (select * from myUsers) as t" );
+				if(rs.next()){
+					int t = rs.getInt("t");
+					if (t == 0){
+						stmt.executeUpdate("create table IF NOT EXISTS myUsers (usuario varchar(10) PRIMARY KEY,senha TEXT NOT NULL);");
+						stmt.executeUpdate("insert into myUsers values('admin','admin123');");
+						stmt.executeUpdate("insert into myUsers values('fulano','dsjfklasd');");
+					}
+				}
+				
+
 
 			//Rodar query para validar!
 			stmt = c.createStatement();
       			
-			ResultSet rs = stmt.executeQuery( "SELECT COUNT(*) as r FROM myUsers  where usuario='"
+			rs = stmt.executeQuery( "SELECT COUNT(*) as r FROM myUsers  where usuario='"
 				       	+ user + "' and senha='"+password+"';"  );
       			
       			
@@ -48,7 +63,7 @@ public class ValidaLogin {
 	}
 
 	public static void main(String[] args) {
-		ValidaLogin myValida = new ValidaLogin("myDB.db");
+		ValidaLogin myValida = new ValidaLogin();
 
         	System.out.println("daniel, teste123 ==>"+ myValida.processaLogin("daniel","teste123"));
 
