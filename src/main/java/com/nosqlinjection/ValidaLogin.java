@@ -20,15 +20,16 @@ public class ValidaLogin {
 	        try {
         	 	Class.forName("org.sqlite.JDBC");
          		//c = DriverManager.getConnection("jdbc:sqlite:./MyDB.db");
-				c = DriverManager.getConnection("jdbc:sqlite:MyDB.db");
+				c = DriverManager.getConnection("jdbc:sqlite:");
 				
 				//Criar esquema e dados de teste!
 				stmt = c.createStatement();
-				ResultSet rs = stmt.executeQuery( "select exists (select * from myUsers) as t" );
+				stmt.executeUpdate("create table IF NOT EXISTS myUsers (usuario varchar(10) PRIMARY KEY,senha TEXT NOT NULL);");
+				ResultSet rs = stmt.executeQuery( "select count(*) as t from myUsers;" );
 				if(rs.next()){
 					int t = rs.getInt("t");
 					if (t == 0){
-						stmt.executeUpdate("create table IF NOT EXISTS myUsers (usuario varchar(10) PRIMARY KEY,senha TEXT NOT NULL);");
+						
 						stmt.executeUpdate("insert into myUsers values('admin','admin123');");
 						stmt.executeUpdate("insert into myUsers values('fulano','dsjfklasd');");
 					}
