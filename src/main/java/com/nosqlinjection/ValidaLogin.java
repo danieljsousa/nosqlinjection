@@ -19,7 +19,7 @@ public class ValidaLogin {
       
 	        try {
         	 	Class.forName("org.sqlite.JDBC");
-         		c = DriverManager.getConnection("jdbc:sqlite:MyDB.db");
+         		c = DriverManager.getConnection("jdbc:sqlite:./MyDB.db");
 
 			//Rodar query para validar!
 			stmt = c.createStatement();

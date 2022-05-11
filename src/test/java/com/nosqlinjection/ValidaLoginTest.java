@@ -12,7 +12,7 @@ public class ValidaLoginTest{
 		assertEquals(conseguiu, false);
 	}
 
-	/*@Test
+	@Test
 	public void testLogin1(){
 		ValidaLogin auxValida = new ValidaLogin("myDB.db");
 		boolean sevalidou = auxValida.processaLogin("daniel","teste123");
@@ -26,7 +26,7 @@ public class ValidaLoginTest{
 		assertEquals(sevalidou, true);
 	}
 
-	@Test
+	/*@Test
 	public void testLoginInject1(){
 		ValidaLogin auxValida = new ValidaLogin("myDB.db");
 		boolean sevalidou = auxValida.processaLogin("' or true --","qualquersenha");
