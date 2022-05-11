@@ -6,8 +6,13 @@ import org.junit.Test;
 
 public class ValidaLoginTest{
 
+	public void testConsegueCriarObjeto(){
+		ValidaLogin auxValida = new ValidaLogin("myDB.db");
+		boolean conseguiu = auxValida != null ? true:false;
+		assertEquals(conseguiu, false);
+	}
 
-	@Test
+	/*@Test
 	public void testLogin1(){
 		ValidaLogin auxValida = new ValidaLogin("myDB.db");
 		boolean sevalidou = auxValida.processaLogin("daniel","teste123");
@@ -21,7 +26,7 @@ public class ValidaLoginTest{
 		assertEquals(sevalidou, true);
 	}
 
-	/*@Test
+	@Test
 	public void testLoginInject1(){
 		ValidaLogin auxValida = new ValidaLogin("myDB.db");
 		boolean sevalidou = auxValida.processaLogin("' or true --","qualquersenha");
